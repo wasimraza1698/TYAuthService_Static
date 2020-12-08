@@ -3,20 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AuthService.Data;
 
 namespace AuthService.Repositories
 {
     public class UserRepo : IRepository
     {
-        private readonly AuthDbContext _context;
-        public UserRepo(AuthDbContext context)
+        private static List<User> users = new List<User>()
         {
-            _context = context;
-        }
+            new User(){UserID = 1,UserName = "Admin",Password = "Admin@123"},
+            new User(){UserID = 2,UserName = "Wasim",Password = "123456"},
+            new User(){UserID = 3,UserName = "Raza",Password = "abcdef"},
+            new User(){UserID = 4,UserName = "Messi",Password = "GOAT10"}
+        };
         public User Login(User user)
         {
-            return _context.Users.SingleOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
+            return users.SingleOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
         }
     }
 }
