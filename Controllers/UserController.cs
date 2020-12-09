@@ -24,6 +24,19 @@ namespace AuthService.Controllers
             _userRepo = userRepo;
             _config = config;
         }
+        [HttpPost]
+        public IActionResult Get(User valUser)
+        {
+            User user = _userRepo.Login(valUser);
+            if (user != null)
+            {
+                return new OkObjectResult(user);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         [HttpPost]
         public IActionResult Login(User credentials)
